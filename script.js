@@ -140,3 +140,51 @@ function toggleTestimonialForm() {
   const formContainer = document.getElementById('testimonial-form-container');
   formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
 }
+
+// Hamburger Menu
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
+// Dropdown Menu
+const dropdowns = document.querySelectorAll('.dropdown');
+
+dropdowns.forEach(dropdown => {
+  const dropbtn = dropdown.querySelector('.dropbtn');
+  if (dropbtn) {
+    dropbtn.addEventListener('click', (e) => {
+      // On mobile, the link will just work. On desktop, this click is for hover fallback.
+    });
+  }
+});
+
+// Close dropdowns if clicking outside
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    const dropdowns = document.querySelectorAll('.dropdown-content');
+    dropdowns.forEach(dropdown => {
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+      }
+    });
+  }
+}
+
+// Navbar scroll behavior
+let lastScrollTop = 0;
+const topNav = document.querySelector('.top-nav');
+
+window.addEventListener('scroll', () => {
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop) {
+    // Downscroll
+    topNav.style.top = '-100px';
+  } else {
+    // Upscroll
+    topNav.style.top = '0';
+  }
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
